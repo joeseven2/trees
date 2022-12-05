@@ -84,28 +84,40 @@ function threeTreeHorizontalScene(season) {
 
     var innerwidth = fullwidth - 2 * border;
     //set variable winterColor to white blue
-    var winterColor = ["#79C0D7", "#A0D1E0", "#C7E2E9", "#EEF3F2"];
+    var winterColor = ["#79C0D7", "#2377A4", "#C7E2E9", "#EEF3F2"];
     var springColor = ["#A0DB9E","#E3F8B3"]
     var summerColor = ["#087830","#059033"]
     var fallColor = ["#BA6300","#E88E1C"]
 
+    //add hex color winterColor by amount season
     
+ 
+ /*
+    winterColor = winterColor.map(function (x) { return "#"+((parseInt(x.replace("#",""), 16)+parseInt(season)).toString(16)) });
+    springColor = springColor.map(function (x) { return "#"+((parseInt(x.replace("#",""), 16)+parseInt(season)).toString(16)) });
+    summerColor = summerColor.map(function (x) { return "#"+((parseInt(x.replace("#",""), 16)+parseInt(season)).toString(16)) });
+    fallColor = fallColor.map(function (x) { return "#"+((parseInt(x.replace("#",""), 16)+parseInt(season)).toString(16)) });
+*/
+
+   
+
 
 
     if (innerwidth > 320) {
         //if season is < 25 set to winterColor
         if (season < 25) {
-            tree(new Point(border + Math.round(innerwidth * (1 / 2)), height - 23), config("black", winterColor[0]));
-            tree(new Point(border + Math.round(innerwidth * (2 / 3)), height - 23), config("black", winterColor[1]));
-        } else if (season < 50) {
             tree(new Point(border + Math.round(innerwidth * (1 / 2)), height - 23), config("black", springColor[0]));
             tree(new Point(border + Math.round(innerwidth * (2 / 3)), height - 23), config("black", springColor[1]));
-        } else if (season < 75) {
+        } else if (season < 50) {
             tree(new Point(border + Math.round(innerwidth * (1 / 2)), height - 23), config("black", summerColor[0]));
             tree(new Point(border + Math.round(innerwidth * (2 / 3)), height - 23), config("black", summerColor[1]));
-        } else {
+        } else if (season < 75) {
             tree(new Point(border + Math.round(innerwidth * (1 / 2)), height - 23), config("black", fallColor[0]));
             tree(new Point(border + Math.round(innerwidth * (2 / 3)), height - 23), config("black", fallColor[1]));
+        } else {
+             
+            tree(new Point(border + Math.round(innerwidth * (1 / 2)), height - 23), config("black", winterColor[0]));
+            tree(new Point(border + Math.round(innerwidth * (2 / 3)), height - 23), config("black", winterColor[1]));
         }
 
 
@@ -119,9 +131,11 @@ threeTreeHorizontalScene(12);
 
 //jquery document ready 
 $(document).ready(function () {
+ 
+    
 
     //event handler for formControlRange change
-    $("#formControlRange").change(function () {
+    $("#formControlRange").on("input", function () {
         //get value of formControlRange
         var value = $(this).val();
         //set value of formControlRange to span
