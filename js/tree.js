@@ -1,3 +1,5 @@
+
+
 var x = new Point(1, 0);
 var y = new Point(0, 1);
 
@@ -64,7 +66,9 @@ function tree(pt, cfg) {
     branch(pt, 0, 40, 35, cfg);
 }
 
-function threeTreeHorizontalScene() {
+function threeTreeHorizontalScene(season) {
+    //clear canvas
+    paper.project.activeLayer.removeChildren();
     var fullwidth = paper.view.size.width;
     var height = paper.view.size.height;
     var border = Math.round(fullwidth / 12) + 50;
@@ -75,13 +79,54 @@ function threeTreeHorizontalScene() {
         strokeWidth: 0
     }
 
+    //log season
+    console.log(season);
+
     var innerwidth = fullwidth - 2 * border;
+    //set variable winterColor to white blue
+    var winterColor = ["#79C0D7", "#A0D1E0", "#C7E2E9", "#EEF3F2"];
+    var springColor = ["#A0DB9E","#E3F8B3"]
+    var summerColor = ["#087830","#059033"]
+    var fallColor = ["#BA6300","#E88E1C"]
+
+    
+
+
     if (innerwidth > 320) {
-        tree(new Point(border + Math.round(innerwidth * (1 / 3)), height - 23), config("black", "Orange"));
-        tree(new Point(border + Math.round(innerwidth * (2 / 3)), height - 23), config("black", "#ec5800"));
+        //if season is < 25 set to winterColor
+        if (season < 25) {
+            tree(new Point(border + Math.round(innerwidth * (1 / 2)), height - 23), config("black", winterColor[0]));
+            tree(new Point(border + Math.round(innerwidth * (2 / 3)), height - 23), config("black", winterColor[1]));
+        } else if (season < 50) {
+            tree(new Point(border + Math.round(innerwidth * (1 / 2)), height - 23), config("black", springColor[0]));
+            tree(new Point(border + Math.round(innerwidth * (2 / 3)), height - 23), config("black", springColor[1]));
+        } else if (season < 75) {
+            tree(new Point(border + Math.round(innerwidth * (1 / 2)), height - 23), config("black", summerColor[0]));
+            tree(new Point(border + Math.round(innerwidth * (2 / 3)), height - 23), config("black", summerColor[1]));
+        } else {
+            tree(new Point(border + Math.round(innerwidth * (1 / 2)), height - 23), config("black", fallColor[0]));
+            tree(new Point(border + Math.round(innerwidth * (2 / 3)), height - 23), config("black", fallColor[1]));
+        }
+
+
+         
     } else {
         tree(new Point(border + Math.round(innerwidth * (1 / 2)), height - 23), config("black", "#03992c"));
     }
 }
 
-threeTreeHorizontalScene();
+threeTreeHorizontalScene(12);
+
+//jquery document ready 
+$(document).ready(function () {
+
+    //event handler for formControlRange change
+    $("#formControlRange").change(function () {
+        //get value of formControlRange
+        var value = $(this).val();
+        //set value of formControlRange to span
+
+        threeTreeHorizontalScene(value);
+    });
+
+});

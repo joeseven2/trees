@@ -3,16 +3,39 @@
 <head>
     <!-- include paperjs -->
     <script src="js/paper-full.min.js"></script>
+    <!-- include bootstrap 4 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <!-- include jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+     <script src="js/tree.js" type="text/paperscript" canvas="canvas0">  </script>
+
 </head>
 
 <body>
+    <div class="container">
+        <div class="row">
+            <h1>Tree Generator</h1>
+        </div>
+        <!-- add a bootstrap range input between seasons: winter, spring, summer and fall -->
+        <form>
+            <div class="form-group">
+              <label for="formControlRange">Season</label>
+              <input type="range" class="form-control-range" id="formControlRange">
+            </div>
+          </form>
+    </div>
     <main>
         <div class="post">
 
 
 
+
+            <!-- add a canvas that displays the tree -->
+
             <figure class="nomargin">
-                <script src="js/tree.js" type="text/paperscript" canvas="canvas0">  </script>
+               
                 <canvas data-paper-resize="true" id="canvas0" style="
               width: 120%;
               margin-left: -10%;
